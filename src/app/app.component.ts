@@ -6,27 +6,31 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title;
-  totalAngularPackages;
-
+  datas;
+    
   ngOnInit(){
-    this.http.get<any>('	https://api.adviceslip.com/advice')
+    this.http.get<Iadvice>('https://api.adviceslip.com/advice')
         .subscribe(data => {
-            this.totalAngularPackages = data;
-            let total = JSON.stringify(this.totalAngularPackages.slip.advice)
-            // console.log(JSON.stringify(this.totalAngularPackages));
-            this.title = total;
-            console.log(total)
-
+            this.datas = data;
+            this.datas = JSON.stringify(this.datas.slip.advice)
+            console.log('advice here',this.datas)
         },
-        error => console.log('there is an error',error)
+        error => console.log('there is an  error',error)
         )
-  }
+  } 
   constructor(private http: HttpClient){}
 }
-
-
 interface Iadvice{
   id: number,
   advice: string;
 }
+
+
+
+
+
+
+
+            // let total = JSON.stringify(this.totalAngularPackages)
+            // console.log(JSON.stringify(this.totalAngularPackages));
+            // this.title = total;
